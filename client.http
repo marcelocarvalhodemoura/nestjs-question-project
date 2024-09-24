@@ -1,0 +1,44 @@
+@base_url = http://localhost:3000
+@authToken = {{authenticate.response.body.access_token}}
+# @name create_accounts
+POST  {{base_url}}/accounts
+Content-Type: application/json
+
+{
+   "name": "John Doe",
+   "email": "johndoe@test.com",
+   "password": "password"
+}
+
+
+###
+
+# @name authenticate
+POST  {{base_url}}/sessions
+Content-Type: application/json
+
+{
+   "email": "johndoe@test.com",
+   "password": "password"
+}
+
+
+###
+
+# @name create_questions
+POST  {{base_url}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+   "title":"Test Title",
+   "content":"This text is a litle bit test to describe for question api in nodejs and Nestjs"
+}
+
+
+###
+
+# @name fetch_recent_question
+GET  {{base_url}}/questions
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
