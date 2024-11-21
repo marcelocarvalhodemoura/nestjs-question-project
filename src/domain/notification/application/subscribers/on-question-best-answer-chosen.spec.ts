@@ -22,29 +22,39 @@ let inMemoryNotificationsRepository: InMemoryNotificationsRepository
 let sendNotificationUseCase: SendNotificationUseCase
 
 const sendNotificationExecuteMock =
-  vi.fn<(request: SendNotificationUseCaseRequest) => Promise<SendNotificationUseCaseResponse>>()
+  vi.fn<
+    (
+      request: SendNotificationUseCaseRequest,
+    ) => Promise<SendNotificationUseCaseResponse>
+  >()
 
 describe('On Question Best Answer Chosen', () => {
   beforeEach(() => {
-    inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentsRepository,
     )
-    inMemoryAnswerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository()
-    inMemoryAnswersRepository = new InMemoryAnswersRepository(inMemoryAnswerAttachmentsRepository)
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository()
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryAnswerAttachmentsRepository,
+    )
     inMemoryNotificationsRepository = new InMemoryNotificationsRepository()
-    sendNotificationUseCase = new SendNotificationUseCase(inMemoryNotificationsRepository)
+    sendNotificationUseCase = new SendNotificationUseCase(
+      inMemoryNotificationsRepository,
+    )
 
-    vi.mock('path/to/module', () => ({
-      sendNotificationUseCase: {
-        execute:
-          vi.fn<
-            (request: SendNotificationUseCaseRequest) => Promise<SendNotificationUseCaseResponse>
-          >(),
-      },
+    vi.mock('../use-cases/send-notification', () => ({
+      SendNotificationUseCase: vi.fn().mockImplementation(() => ({
+        execute: sendNotificationExecuteMock,
+      })),
     }))
 
-    new OnQuestionBestAnswerChosen(inMemoryAnswersRepository, sendNotificationUseCase)
+    new OnQuestionBestAnswerChosen(
+      inMemoryAnswersRepository,
+      sendNotificationUseCase,
+    )
   })
 
   it('should send a notification when topic has new best answer chosen', async () => {

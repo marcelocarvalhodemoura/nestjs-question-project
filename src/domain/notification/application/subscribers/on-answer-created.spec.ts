@@ -1,4 +1,4 @@
-import { OnAnswerCreated } from '@/domain/notification/application/subscribers/on-answer-created'
+import { OnAnswerCreated } from './on-answer-created'
 import { makeAnswer } from 'test/factories/make-answer'
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
@@ -22,27 +22,39 @@ let inMemoryNotificationsRepository: InMemoryNotificationsRepository
 let sendNotificationUseCase: SendNotificationUseCase
 
 const sendNotificationExecuteMock =
-  vi.fn<(request: SendNotificationUseCaseRequest) => Promise<SendNotificationUseCaseResponse>>()
+  vi.fn<
+    (
+      request: SendNotificationUseCaseRequest,
+    ) => Promise<SendNotificationUseCaseResponse>
+  >()
 
 describe('On Answer Created', () => {
   beforeEach(() => {
-    inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentsRepository,
     )
-    inMemoryAnswerAttachmentsRepository = new InMemoryAnswerAttachmentsRepository()
-    inMemoryAnswersRepository = new InMemoryAnswersRepository(inMemoryAnswerAttachmentsRepository)
+    inMemoryAnswerAttachmentsRepository =
+      new InMemoryAnswerAttachmentsRepository()
+    inMemoryAnswersRepository = new InMemoryAnswersRepository(
+      inMemoryAnswerAttachmentsRepository,
+    )
     inMemoryNotificationsRepository = new InMemoryNotificationsRepository()
-    sendNotificationUseCase = new SendNotificationUseCase(inMemoryNotificationsRepository)
+    sendNotificationUseCase = new SendNotificationUseCase(
+      inMemoryNotificationsRepository,
+    )
 
-    vi.mock('path/to/module', () => ({
-      sendNotificationUseCase: {
-        execute:
-          vi.fn<
-            (request: SendNotificationUseCaseRequest) => Promise<SendNotificationUseCaseResponse>
-          >(),
+    vi.mock(
+      '@/domain/notification/application/use-cases/send-notification',
+      () => {
+        return {
+          SendNotificationUseCase: vi.fn().mockImplementation(() => ({
+            execute: sendNotificationExecuteMock, // Use o mock declarado acima
+          })),
+        }
       },
-    }))
+    )
 
     new OnAnswerCreated(inMemoryQuestionsRepository, sendNotificationUseCase)
   })

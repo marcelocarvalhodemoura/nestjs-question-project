@@ -3,6 +3,14 @@ import { defineConfig } from 'vitest/config'
 import tsConfigPath from 'vite-tsconfig-paths'
 
 export default defineConfig({
+   plugins: [
+      tsConfigPath(),
+      swc.vite({
+         module: {
+            type: 'es6',
+         },
+      }),
+   ],
   resolve: {
     alias: [
       {
@@ -14,13 +22,10 @@ export default defineConfig({
   test: {
     globals: true,
     root: './',
+    include: ['./src/**/*.spec.ts'],
+     alias: {
+        '@/': new URL('./src/', import.meta.url).pathname,
+     }
   },
-  plugins: [
-    tsConfigPath(),
-    swc.vite({
-      module: {
-        type: 'es6',
-      },
-    }),
-  ],
+
 })

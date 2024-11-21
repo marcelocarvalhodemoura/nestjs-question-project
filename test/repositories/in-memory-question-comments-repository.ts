@@ -2,7 +2,9 @@ import { PaginationParams } from '@/core/repositories/pagination-params'
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
 import { QuestionComment } from '@/domain/forum/enterprise/entities/question-comment'
 
-export class InMemoryQuestionCommentsRepository implements QuestionCommentsRepository {
+export class InMemoryQuestionCommentsRepository
+  implements QuestionCommentsRepository
+{
   public items: QuestionComment[] = []
 
   async findById(id: string) {
@@ -28,7 +30,9 @@ export class InMemoryQuestionCommentsRepository implements QuestionCommentsRepos
   }
 
   async delete(questionComment: QuestionComment) {
-    const itemIndex = this.items.findIndex((item) => item.id === questionComment.id)
+    const itemIndex = this.items.findIndex(
+      (item) => item.id === questionComment.id,
+    )
 
     this.items.splice(itemIndex, 1)
   }

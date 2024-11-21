@@ -1,6 +1,6 @@
 // Error
 export class Left<L, R> {
-  readonly value: L
+  value: L
 
   constructor(value: L) {
     this.value = value
@@ -17,7 +17,7 @@ export class Left<L, R> {
 
 // Success
 export class Right<L, R> {
-  readonly value: R
+  value: R
 
   constructor(value: R) {
     this.value = value

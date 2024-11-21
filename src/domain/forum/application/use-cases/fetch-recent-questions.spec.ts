@@ -9,7 +9,8 @@ let sut: FetchRecentQuestionsUseCase
 
 describe('Fetch Recent Questions', () => {
   beforeEach(() => {
-    inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentsRepository,
     )
@@ -17,9 +18,15 @@ describe('Fetch Recent Questions', () => {
   })
 
   it('should be able to fetch recent questions', async () => {
-    await inMemoryQuestionsRepository.create(makeQuestion({ createdAt: new Date(2022, 0, 20) }))
-    await inMemoryQuestionsRepository.create(makeQuestion({ createdAt: new Date(2022, 0, 18) }))
-    await inMemoryQuestionsRepository.create(makeQuestion({ createdAt: new Date(2022, 0, 23) }))
+    await inMemoryQuestionsRepository.create(
+      makeQuestion({ createdAt: new Date(2022, 0, 20) }),
+    )
+    await inMemoryQuestionsRepository.create(
+      makeQuestion({ createdAt: new Date(2022, 0, 18) }),
+    )
+    await inMemoryQuestionsRepository.create(
+      makeQuestion({ createdAt: new Date(2022, 0, 23) }),
+    )
 
     const result = await sut.execute({
       page: 1,

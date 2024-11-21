@@ -11,11 +11,13 @@ let sut: CommentOnQuestionUseCase
 
 describe('Comment on Question', () => {
   beforeEach(() => {
-    inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentsRepository,
     )
-    inMemoryQuestionCommentsRepository = new InMemoryQuestionCommentsRepository()
+    inMemoryQuestionCommentsRepository =
+      new InMemoryQuestionCommentsRepository()
 
     sut = new CommentOnQuestionUseCase(
       inMemoryQuestionsRepository,
@@ -34,6 +36,8 @@ describe('Comment on Question', () => {
       content: 'Comentário teste',
     })
 
-    expect(inMemoryQuestionCommentsRepository.items[0].content).toEqual('Comentário teste')
+    expect(inMemoryQuestionCommentsRepository.items[0].content).toEqual(
+      'Comentário teste',
+    )
   })
 })

@@ -12,7 +12,8 @@ let sut: EditQuestionUseCase
 
 describe('Edit Question', () => {
   beforeEach(() => {
-    inMemoryQuestionAttachmentsRepository = new InMemoryQuestionAttachmentsRepository()
+    inMemoryQuestionAttachmentsRepository =
+      new InMemoryQuestionAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentsRepository,
     )
@@ -57,8 +58,12 @@ describe('Edit Question', () => {
       content: 'Conteúdo teste',
     })
 
-    expect(inMemoryQuestionsRepository.items[0].attachments.currentItems).toHaveLength(2)
-    expect(inMemoryQuestionsRepository.items[0].attachments.currentItems).toEqual([
+    expect(
+      inMemoryQuestionsRepository.items[0].attachments.currentItems,
+    ).toHaveLength(2)
+    expect(
+      inMemoryQuestionsRepository.items[0].attachments.currentItems,
+    ).toEqual([
       expect.objectContaining({ attachmentId: new UniqueEntityID('1') }),
       expect.objectContaining({ attachmentId: new UniqueEntityID('3') }),
     ])

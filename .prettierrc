@@ -1,6 +1,8 @@
 {
    "singleQuote": true,
    "semi": false,
-   "parser": "flow",
-   "trailingComma": "all"
+   "parser": "typescript",
+   "trailingComma": "all",
+   "extends": ["@rocketseat/eslint-config/node", "plugin:prettier/recommended"],
+   "plugins": ["prettier"]
 }

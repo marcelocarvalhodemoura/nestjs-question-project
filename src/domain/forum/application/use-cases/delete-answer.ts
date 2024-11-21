@@ -8,7 +8,10 @@ interface DeleteAnswerUseCaseRequest {
   answerId: string
 }
 
-type DeleteAnswerUseCaseResponse = Either<ResourceNotFoundError | NotAllowedError, null>
+type DeleteAnswerUseCaseResponse = Either<
+  ResourceNotFoundError | NotAllowedError,
+  null
+>
 
 export class DeleteAnswerUseCase {
   constructor(private answersRepository: AnswersRepository) {}
