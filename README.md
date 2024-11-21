@@ -24,7 +24,21 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este é um projeto de sistema de perguntas desenvolvido com o framework [NestJS](https://github.com/nestjs/nest). O sistema permite a criação, gerenciamento e resposta de perguntas, oferecendo uma API RESTful robusta e escalável.
+
+### Funcionalidades Principais
+
+- Criação e gerenciamento de perguntas
+- Sistema de respostas
+- Autenticação e autorização de usuários
+- Validação de dados
+- Documentação da API com Swagger
+
+## Pré-requisitos
+
+- Node.js (versão 14 ou superior)
+- Yarn ou NPM
+- PostgreSQL
 
 ## Installation
 
@@ -58,9 +72,48 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
+## Configuração do Ambiente
+
+```bash
+# Crie um arquivo .env na raiz do projeto
+$ cp .env.example .env
+
+# Configure as variáveis de ambiente no arquivo .env
+DATABASE_URL=
+JWT_SECRET=
+```
+
+## Documentação da API
+
+A documentação da API está disponível através do Swagger UI. Após iniciar o servidor, acesse:
+
+```
+http://localhost:3000/api
+```
+
+## Estrutura do Projeto
+
+```
+src/
+├── auth/           # Autenticação e autorização
+├── questions/      # Módulo de perguntas
+├── answers/        # Módulo de respostas
+├── users/          # Módulo de usuários
+├── common/         # Código compartilhado
+└── config/         # Configurações do projeto
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Contribuição
+
+1. Faça um Fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
 ## Stay in touch
 

@@ -25,7 +25,7 @@ type CreateQuestionBodySchema = z.infer<typeof createQuestionsBodysSchema>
 @Controller('/questions')
 @UseGuards(JwtAuthGuard)
 export class QuestionController {
-  constructor(private createQuestion: CreateQuestionUseCase) {}
+  constructor(private createQuestion) {}
 
   @Post()
   async handle(
